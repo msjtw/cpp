@@ -6,10 +6,12 @@
 
 using namespace std;
 
+const int SIZE = 20;
+
 int main(){
     srand(time(0));
-    int tab[10];
-    for(int i = 0; i < 10; i++){
+    int tab[SIZE];
+    for(int i = 0; i < SIZE; i++){
         tab[i] = rand()%21-10;
         cout << tab[i] << " ";
     }
@@ -18,7 +20,7 @@ int main(){
     int p = 0, k = 0, suma = tab[0];
     int j = 0, sj = 0;
     
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < SIZE; i++){
         if(tab[i] > sj+tab[i]){
             sj = tab[i];
             j = i;
