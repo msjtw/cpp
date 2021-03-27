@@ -9,7 +9,7 @@
 				"-g",
 				"${file}",
 				"-o",
-				"/home/msjtw/c++/zz_exe/${fileBasenameNoExtension}.exe"
+				"/home/msjtw/cpp/zz_exe/${fileBasenameNoExtension}.exe"
 			],
 			"options": {
 				"cwd": "/usr/bin"

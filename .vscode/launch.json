@@ -8,7 +8,7 @@
             "name": "g++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/msjtw/c++/zz_exe/${fileBasenameNoExtension}.exe",
+            "program": "/home/msjtw/cpp/zz_exe/${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
