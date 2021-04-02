@@ -17,7 +17,7 @@ Wszystkie zadania na [szkopule](https://szkopul.edu.pl/task_archive/oi/).
 ### zadania:
 | etap  |     1     |    2     |     3     |    4    |    5     |
 | :---: | :-------: | :------: | :-------: | :-----: | :------: |
-|   1   | cuk [78] | gan [16] | gra [100] | lic [50] | tab  [61] |
+|   1   | cuk [100] | gan [16] | gra [100] | lic [50] | tab  [70] |
 |   2   |  pro []   |  ple []  |  zdj []   | pla []  |  sza []  |
 |   3   |           |
 
