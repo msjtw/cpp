@@ -16,64 +16,48 @@ int main(){
 
     vector <int> d_w;
     vector <int> d_z;
-    vector <int> s (len);
     
     string asd;
     cin >> asd;
-    for(int i = 0; i < asd.length(); ++i)
+    for(int i = asd.length()-1; i >= 0; i--)
         d_w.push_back(asd[i]-'0');
     asd.clear();
     cin >> asd;
-    for(int i = 0; i < asd.length(); ++i)
+    for(int i = asd.length()-1; i >= 0; i--)
         d_z.push_back(asd[i]-'0');
 
-    int carry = 0;
-    for(int i = len-1; i > 0; --i){
-        s[i] = (d_w[i-1] + d_z[i-1] + carry)%10;
-        carry = (d_w[i-1] + d_z[i-1] + carry)/10;
+    for(int i = 0 ; i < 3; i++){
+        d_z.push_back(0);
+        d_w.push_back(0);
     }
-    s[0] = carry%10;
 
-    bool popsuted = false;
     while(oper--){
         char op;
-        int i, c;
-        cin >> op;
-        if(op != 'S'){
-            cin >> i >> c;
-            i = len-(i+1);
-            if(op == 'W'){
-                s[i+1] += c - d_w[i];
-                d_w[i] = c;
-            }
-            else{
-                s[i+1] += c - d_z[i];
-                d_z[i] = c;
-            }
-            if(s[i+1] > 9){
-                int jk = i+1;
-                while(s[jk] > 9){
-                    s[jk] -= 10;
-                    s[jk-1] += 1;
-                    jk--;
+        int p;
+        cin >> op >> p;
+        p--;
+        if(op == 'S'){
+            int suma = (d_w[p] + d_z[p]);
+            while(true){
+                p--;
+                if(d_w[p] + d_z[p] > 9){
+                    suma += 1;
+                    break;
+                }
+                else if(d_w[p] + d_z[p] < 9){
+                    break;
                 }
             }
-            else if(s[i+1] < 0){
-                int jk = i+1;
-                while(s[jk] < 0){
-                    s[jk] += 10;
-                    s[jk-1] -= 1;
-                    jk--;
-                }
-            }
-
+            cout << suma%10 << endl;
         }
         else{
-            cin >> i;
-            i = len-(i+1);
-            cout << s[i+1] << '\n';
+            int a;
+            cin >> a;
+            if(op == 'Z')
+                d_z[p] = a;
+            else
+                d_w[p] = a;
         }
-
     }
 
     return 0;
