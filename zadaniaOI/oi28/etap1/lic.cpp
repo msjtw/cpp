@@ -38,7 +38,7 @@ int main(){
         p--;
         if(op == 'S'){
             int suma = (d_w[p] + d_z[p]);
-            while(true){
+            while(p > 0){
                 p--;
                 if(d_w[p] + d_z[p] > 9){
                     suma += 1;
