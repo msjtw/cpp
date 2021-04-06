@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 
 using namespace std;
 
@@ -16,39 +17,43 @@ int main(){
 
     vector <int> d_w;
     vector <int> d_z;
-    
-    string asd;
-    cin >> asd;
-    for(int i = asd.length()-1; i >= 0; i--)
-        d_w.push_back(asd[i]-'0');
-    asd.clear();
-    cin >> asd;
-    for(int i = asd.length()-1; i >= 0; i--)
-        d_z.push_back(asd[i]-'0');
-
     for(int i = 0 ; i < 3; i++){
         d_z.push_back(0);
         d_w.push_back(0);
     }
 
+    vector <int> suma;
+
+    set <int> poz;
+    
+    string asd;
+    cin >> asd;
+    for(int i = 0; i < asd.length(); i++)
+        d_w.push_back(asd[i]-'0');
+    asd.clear();
+    cin >> asd;
+    for(int i = 0; i < asd.length(); i++)
+        d_z.push_back(asd[i]-'0');
+
+    
+    for(int i = 0 ; i < (int)d_w.size(); i++){
+        suma.push_back(d_w[i] + d_z[i]);
+        if(suma[i] != 9)
+            poz.insert(i);
+    }
+
     while(oper--){
         char op;
-        int p;
-        cin >> op >> p;
-        p--;
+        int p, pi;
+        cin >> op >> pi;
+        p = d_w.size() - pi;
         if(op == 'S'){
-            int suma = (d_w[p] + d_z[p]);
-            while(p > 0){
-                p--;
-                if(d_w[p] + d_z[p] > 9){
-                    suma += 1;
-                    break;
-                }
-                else if(d_w[p] + d_z[p] < 9){
-                    break;
-                }
-            }
-            cout << suma%10 << endl;
+            int wyn = (d_w[p] + d_z[p]);
+            auto tex = poz.upper_bound(p);
+            int k = *tex;
+            if(tex != poz.end() && suma[k] > 9)
+                wyn += 1;
+            cout << wyn%10 << endl;
         }
         else{
             int a;
@@ -57,6 +62,13 @@ int main(){
                 d_z[p] = a;
             else
                 d_w[p] = a;
+
+            suma[p] = d_z[p] + d_w[p];
+
+            if(suma[p] != 9)
+                poz.insert(p);
+            else
+                poz.erase(p);
         }
     }
 
