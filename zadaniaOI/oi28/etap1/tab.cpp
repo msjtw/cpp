@@ -4,7 +4,7 @@
 
 using namespace std;
 
-bool plansza[1005][1005];
+bool zmiany[1005][1005];
 
 int main(){
     ios_base::sync_with_stdio(false);
@@ -12,31 +12,41 @@ int main(){
     cout.tie(nullptr);
 
     int rows, cols, p;
+    int zmian = 0;
     cin >> rows >> cols >> p;
     while(p--){
-        int a, b, c, d;
-        cin >> a >> b >> c >> d;
+        int x1, y1, x2, y2;
+        cin >> x1 >> y1 >> x2 >> y2;
 
-        int zmian = 0;
-        bool zmiana[1010] {};
+        if(zmiany[y2][x2])
+            zmian--;
+        else
+            zmian++;
+        zmiany[y2][x2] ^= 1;
 
-        for(int row = rows; row > 0; --row){
-            bool w_lini = false;
-            for(int col = cols; col > 0; --col){
-                if(row >= a && row <= c && col >= b && col <= d)
-                    plansza[row][col] = !plansza[row][col];
-                bool stan = plansza[row][col];
-                if(w_lini)
-                    zmiana[col] = !zmiana[col];
-                if(zmiana[col])
-                    stan = !stan;
-                if(stan){
-                    zmian++;
-                    zmiana[col] = !zmiana[col];
-                    w_lini = !w_lini;
-                }
-            }
+        if(x1 > 1){
+            if(zmiany[y2][x1-1])
+                zmian--;
+            else
+                zmian++;
+            zmiany[y2][x1-1] ^= 1;
         }
+        if(y1 > 1){
+            if(zmiany[y1-1][x2])
+                zmian--;
+            else
+                zmian++;
+            zmiany[y1-1][x2] ^= 1;
+        }
+        if(x1 > 1 && y1 > 1){
+            if(zmiany[y1-1][x1-1])
+                zmian--;
+            else
+                zmian++;
+            zmiany[y1-1][x1-1] ^= 1;
+        }
+
+        
         cout << zmian << "\n";
 
 
