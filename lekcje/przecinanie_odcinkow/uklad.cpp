@@ -1,13 +1,3 @@
-# Przecianie
-
-## Wartości funkcji przecina:
-    - 0 –> są rozłączne, 
-    - 1 –> koniec jednego odcinka należy do drugiego odcinka
-    - 2 -> przecinają się;
-
-## Kod:
-
-```c++
 #include <iostream>
 
 using namespace std;
@@ -59,15 +49,23 @@ int przecina(odc a, odc b){
 }
 
 int main(){
-    int p = 10;
-    odc a, b;
+    odc a,b,c,d;
+    cin >> a.a.x >> a.a.y >> a.b.x >> a.b.y;
+    cin >> b.a.x >> b.a.y >> b.b.x >> b.b.y;
+    cin >> c.a.x >> c.a.y >> c.b.x >> c.b.y;
+    cin >> d.a.x >> d.a.y >> d.b.x >> d.b.y;
 
-    while(p--){
-        cin >> a.a.x >> a.a.y >> a.b.x >> a.b.y >> b.a.x >> b.a.y >> b.b.x >> b.b.y;
-        cout << przecina(a, b) << endl;
+    if(przecina(a,b) == 0 && przecina(a,d) == 0){
+        cout << "niepoprawne przeciecie";
+        return 0;
     }
 
+    odc e = {b.b, d.a};
+    if(przecina(a,e) == 2){
+        cout << "po przeciwnych stronach";
+        return 0;
+    }
+
+    cout << "po tej samej stronie";
     return 0;
 }
-```
-  
