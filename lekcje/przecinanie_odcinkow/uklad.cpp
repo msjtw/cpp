@@ -49,11 +49,17 @@ int przecina(odc a, odc b){
 }
 
 int main(){
-    odc a,b,c,d;
-    cin >> a.a.x >> a.a.y >> a.b.x >> a.b.y;
-    cin >> b.a.x >> b.a.y >> b.b.x >> b.b.y;
-    cin >> c.a.x >> c.a.y >> c.b.x >> c.b.y;
-    cin >> d.a.x >> d.a.y >> d.b.x >> d.b.y;
+    punkt a1,b1,c1,d1;
+    cin >> a.x >> a.y;
+    cin >> b.x >> b.y;
+    cin >> c.x >> c.y;
+    cin >> d.x >> d.y;
+
+    odc a = {a1,b1};
+    odc b = {b1,c1};
+    odc c = {c1,d1};
+    odc d = {}
+
 
     if(przecina(a,b) == 0 && przecina(a,d) == 0){
         cout << "niepoprawne przeciecie";
