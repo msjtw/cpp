@@ -49,29 +49,33 @@ int przecina(odc a, odc b){
 }
 
 int main(){
-    punkt a1,b1,c1,d1;
-    cin >> a.x >> a.y;
-    cin >> b.x >> b.y;
-    cin >> c.x >> c.y;
-    cin >> d.x >> d.y;
+    for(int i = 0 ;i < 5; i++){
+        odc a;
+        cin >> a.a.x >> a.a.y >> a.b.x >> a.b.y;
 
-    odc a = {a1,b1};
-    odc b = {b1,c1};
-    odc c = {c1,d1};
-    odc d = {}
+        punkt a1,b1,c1,d1;
+        cin >> a1.x >> a1.y;
+        cin >> b1.x >> b1.y;
+        cin >> c1.x >> c1.y;
+        cin >> d1.x >> d1.y;
+
+        odc b = {a1, b1};
+        odc c = {b1, c1};
+        odc d = {c1, d1};
 
 
-    if(przecina(a,b) == 0 && przecina(a,d) == 0){
-        cout << "niepoprawne przeciecie";
-        return 0;
+        if(przecina(a,b) == 0 || przecina(a,d) == 0){
+            cout << 0;
+            continue;
+        }
+
+        odc e = {b.b, d.a};
+        if(przecina(a,e) == 2){
+            cout << 2;
+            continue;
+        }
+
+        cout << 1;
     }
-
-    odc e = {b.b, d.a};
-    if(przecina(a,e) == 2){
-        cout << "po przeciwnych stronach";
-        return 0;
-    }
-
-    cout << "po tej samej stronie";
     return 0;
 }
