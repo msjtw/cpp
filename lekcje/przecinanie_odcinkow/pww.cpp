@@ -43,20 +43,44 @@ int przecina(odc a, odc b){
         return 1;
 
     if(det1 == -1*det2 && det3 == -1*det4)
-        return 2;
+        return 1;
 
     return 0;
 }
+
+odc boki[50];
+punkt w[50];
 
 int main(){
-    int p = 10;
-    odc a, b;
 
-    while(p--){
-        cin >> a.a.x >> a.a.y >> a.b.x >> a.b.y >> b.a.x >> b.a.y >> b.b.x >> b.b.y;
-        cout << przecina(a, b) << endl;
+    int wiez;
+    int naj_y = -1000000;
+    cin >> wiez;
+    for(int  i = 0 ; i < wiez; i++){
+        cin >> w[i].x >> w[i].y;
+        naj_y = max(naj_y, w[i].y);
+    }
+    w[wiez] = w[0];
+
+    for(int i = 0; i < wiez; i++){
+        boki[i] = {w[i], w[i+1]};
     }
 
+    odc spr;
+    cin >> spr.a.x >> spr.a.y;
+    spr.b.x = spr.a.x;
+    spr.b.y = naj_y + 10;
+
+    int prz = 0;
+
+    for(int i = 0; i < wiez; i++){
+        prz += przecina(spr, boki[i]);
+    }
+
+    if(prz&1)
+        cout << "TAK";
+    else
+        cout << "NIE";
+ 
     return 0;
-}
-  
+};
