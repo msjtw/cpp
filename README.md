@@ -23,6 +23,11 @@ Wszystkie zadania na [szkopule](https://szkopul.edu.pl/task_archive/oi/).
 
 
 ## OI27
+| etap  |     1     |    2     |     3     |    4    |    5     |
+| :---: | :-------: | :------: | :-------: | :-----: | :------: |
+|   1   | nww [] | pis [] | pom [15] | prz [] | ukl [] |
+|   2   |   []   |   []  |   []   | []  |   []  |
+|   3   |     
 
 ## OI26
 
