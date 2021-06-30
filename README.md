@@ -5,7 +5,7 @@ better version of c-
   - [OI28](#oi28)
     - [zadania:](#zadania)
   - [OI27](#oi27)
-  - [OI26](#oi26)
+  - [OI18](#oi18)
 
 
 # Progress of OI
@@ -29,7 +29,13 @@ Wszystkie zadania na [szkopule](https://szkopul.edu.pl/task_archive/oi/).
 |   2   |   []   |   []  |   []   | []  |   []  |
 |   3   |     
 
-## OI26
+## OI18
+| etap  |     1     |    2     |     3     |    4    |    5     |
+| :---: | :-------: | :------: | :-------: | :-----: | :------: |
+|   1   | kon [] | liz [100] | pio [] | prz [] | wyk [] |
+|   2   |   []   |   []  |   []   | []  |   []  |
+|   3   |     
+
 
 
 
