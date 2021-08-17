@@ -5,21 +5,9 @@
 using namespace std;
 
 int main(){
-    int p;
-    cin >> p;
-    int zmien;
-    cin >> zmien;
-    vector <int> z;
-    for(int i = 0; i < zmien; i++){
-        int a;
-        cin >> a;
-        z.push_back(a);
-    }
-
-    cout << p << ":" << zmien << "|";
-    for(int i = 0; i < zmien; i++){
-        cout << z[i] << ":";
-    }
+    int k;
+    cin >> k;
+    cout << 2*k+4 << endl; 
 
     return 0;
 
