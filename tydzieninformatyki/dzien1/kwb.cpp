@@ -45,15 +45,16 @@ int query(int drz_prz[], int p, int q){
 }
 
 void dfs(int id, int height){
-    odw[id] = true;
     order.push_back(id);
     insert(drz, order.size()-1, height);
     pier[id] = order.size()-1;
     h[id] = height;
     for(int i = 0 ; i < graf[id].size(); i++){
         if(!odw[graf[id][i]]){
+            odw[graf[id][i]] = true;
             dfs(graf[id][i], height+1);
             order.push_back(id);
+            insert(drz, order.size()-1, height);
         }
     }
 }
@@ -68,6 +69,7 @@ int main(){
         graf[b].push_back(a);
     }
 
+    odw[1] = true;
     dfs(1,1);
 
     int p;
