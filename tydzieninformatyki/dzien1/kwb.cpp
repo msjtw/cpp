@@ -13,19 +13,31 @@ vector <int> graf[100007];
 vector <int> order;
 int h[100007];
 int pier[100007];
-int drz[1<21];
-int base = 1<20;
 
+int drz[1<<20];
+int base = 1;
 
 bool odw[100007];
-
+void dfs(int id, int height){
+    odw[id] = true;
+    order.push_back(id);
+    pier[id] = order.size()-1;
+    h[id] = height;
+    for(int i = 0 ; i < graf[id].size(); i++){
+        if(!odw[graf[id][i]]){
+            //odw[graf[id][i]] = true;
+            dfs(graf[id][i], height+1);
+            order.push_back(id);
+        }
+    }
+}
 
 void insert(int drz_prz[], int id, int val){
     int i = id + base;
     drz_prz[i] = val;
     while(i > 0){
         i >>= 1;
-        drz_prz[i] = min(drz_prz[2*i], drz_prz[2*i+1]);
+        drz_prz[i] =  min(drz_prz[2*i], drz_prz[2*i+1]);
     }
 }
 
@@ -44,22 +56,9 @@ int query(int drz_prz[], int p, int q){
     return ret;
 }
 
-void dfs(int id, int height){
-    order.push_back(id);
-    insert(drz, order.size()-1, height);
-    pier[id] = order.size()-1;
-    h[id] = height;
-    for(int i = 0 ; i < graf[id].size(); i++){
-        if(!odw[graf[id][i]]){
-            odw[graf[id][i]] = true;
-            dfs(graf[id][i], height+1);
-            order.push_back(id);
-            insert(drz, order.size()-1, height);
-        }
-    }
-}
-
 int main(){
+    ios_base::sync_with_stdio(0);
+
     int w;
     cin >> w;
     for(int i = 1; i < w; i++){
@@ -69,8 +68,14 @@ int main(){
         graf[b].push_back(a);
     }
 
-    odw[1] = true;
     dfs(1,1);
+
+    while(base < order.size())
+        base <<= 1;
+
+    for(int i = 0; i < order.size(); i++){
+        insert(drz, i, h[order[i]]);
+    }
 
     int p;
     cin >> p;
@@ -79,8 +84,8 @@ int main(){
         cin >> a >> b;
         if(pier[a] > pier[b])
             swap(a,b);
-        int mini = query(drz,pier[a],pier[b]);
-        cout << (h[a]-mini)+(h[b]-mini) << endl;
+        int mini = query(drz, pier[a], pier[b]);
+        cout << (h[a]-mini) + (h[b]-mini) << endl;
     }
     
 
