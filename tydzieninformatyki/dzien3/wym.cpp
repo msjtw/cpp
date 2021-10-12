@@ -28,7 +28,7 @@ int main(){
     for(int i = 1; i <= ilosc; i++){
         for(int j = 0; j <= dop; j++){
             if(j-przedmioty[i].waga >= 0){
-                if(tab[i-1][j].wartosc > tab[i-1][j-przedmioty[i].waga].wartosc+przedmioty[i].wartosc){
+                if(tab[i-1][j].wartosc >= tab[i-1][j-przedmioty[i].waga].wartosc+przedmioty[i].wartosc){
                     tab[i][j].wartosc = tab[i-1][j].wartosc;
                     tab[i][j].ost = 0;
 
@@ -64,12 +64,15 @@ int main(){
 
     ilosc -= zakazane.size();
 
+    //for(int i = 1; i < ilosc)
+
     kom tab2[107][1007] {};
 
-    for(int i = 1; i <= przedmioty.size(); i++){
+
+    for(int i = 1; i <= ilosc; i++){
         for(int j = 0; j <= dop; j++){
             if(j-przedmioty[i].waga >= 0){
-                if(tab2[i-1][j].wartosc > tab2[i-1][j-przedmioty[i].waga].wartosc+przedmioty[i].wartosc){
+                if(tab2[i-1][j].wartosc >= tab2[i-1][j-przedmioty[i].waga].wartosc+przedmioty[i].wartosc){
                     tab2[i][j].wartosc = tab2[i-1][j].wartosc;
                     tab2[i][j].ost = 0;
 
