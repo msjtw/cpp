@@ -1,26 +1,22 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <cstdlib>
-#include <ctime>
 
 using namespace std;
 
-int main(){
-    ios_base::sync_with_stdio(0);
-    srand(time(NULL));
+int n;
 
-    int dni = 1000000;
-    cout << dni << '\n';
-    long long stan = 0;
-    for(int i = 0; i < dni; i++){
-        int wej = rand()%100000;
-        stan += wej;
-        int wyj = rand()%stan;
-        stan -= wyj;
-        cout << wej << " " << wyj << '\n';
+int licz(int x){
+    if(x == 1)
+        return 1;
+    else{
+        int w = licz(x/2);
+        if(x%2 == 1)
+            return w+1;
+        else
+            return w-1;
     }
+}
 
-    return 0;
-
+int main(){
+    for(int i = 1; i <= 50; i++)
+        cout << i << " " << licz(i) << endl;
 }
