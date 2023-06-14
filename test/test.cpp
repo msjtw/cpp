@@ -2,21 +2,46 @@
 
 using namespace std;
 
-int n;
+int binsearch(int p, int q, int arr[], int val) {
 
-int licz(int x){
-    if(x == 1)
-        return 1;
-    else{
-        int w = licz(x/2);
-        if(x%2 == 1)
-            return w+1;
+    int m;
+
+    while(p < q){
+        m = (p+q)/2;
+        if(val < arr[m])
+            q = m;
         else
-            return w-1;
+            p = m+1;
     }
+
+    if(arr[m] <= val)
+        return p;
+    else
+        return -1;
+
+
+
+//    if( p == q )
+//       return arr[p] <= val ? p : -1;
+
+//    int m = (p+q)/ 2;
+
+//    if( val < arr[m] )
+//       return binsearch(p, m, arr, val );
+
+//    int ret = binsearch(m+1, q, arr, val );
+//    return ret == -1 ? m : ret;
 }
 
 int main(){
-    for(int i = 1; i <= 50; i++)
-        cout << i << " " << licz(i) << endl;
+    int arr[] = {2,6,8,11,15};
+    for(int i = 1; i < 17; i++){
+        cout << i << " ";
+    }
+    cout << endl;
+    for(int i = 1; i < 17; i++){
+        cout << binsearch(0, 4, arr, i) << " ";
+        if(i > 9)
+            cout << " ";
+    }
 }
