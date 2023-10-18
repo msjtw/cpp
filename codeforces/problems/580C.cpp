@@ -13,10 +13,14 @@ int max_cats;
 int res = 0;
 
 void dfs(int a, int cats){
+    if(cats > max_cats)
+        return;
+    if(cat[a] == 0)
+        cats = 0;
     visited[a] = true;
     bool leaf = true;
     for(int i = 0; i < tree[a].size(); i++){
-        if(!visited[tree[a][i]] && cats+cat[tree[a][i]] <= max_cats){
+        if(!visited[tree[a][i]]){
             dfs(tree[a][i], cats+cat[tree[a][i]]);
             leaf = false;
         }

@@ -6,7 +6,7 @@ using namespace std;
 
 int stalls, cows;
 vector<int> miejsca;
-vector<int> odl;
+// vector<int> odl;
 
 bool mozna(int odl){
     int set_cows = 1;
@@ -28,11 +28,11 @@ bool mozna(int odl){
 int bin_search(int a, int b){
     while(a <= b){
         int s = (a+b)/2;
-        if(mozna){
-            b = s-1;
+        if(mozna(s)){
+            a = s+1;
         }
         else{
-            a = s;
+            b = s-1;
         }
     }
     return b;
@@ -47,6 +47,9 @@ int main(){
 
         cin >> stalls >> cows;
 
+        miejsca.clear();
+        // odl.clear();
+
         for(int i = 0; i < stalls; i++){
             int a;
             cin >> a;
@@ -55,12 +58,13 @@ int main(){
 
         sort(miejsca.begin(), miejsca.end());
 
-        for(int i = 0; i < stalls; i++){
-            odl.push_back(miejsca[i+1]-miejsca[i]);
-        }
+        //odl.push_back(miejsca[0]);
+        // for(int i = 1; i < stalls; i++){
+        //     odl.push_back(miejsca[i]-miejsca[0]);
+        // }
 
-        sort(odl.begin(), odl.end());
+        // sort(odl.begin(), odl.end());
 
-        cout << bin_search(0, odl.size()-1);
+        cout << bin_search(0, miejsca[miejsca.size()-1]) << endl;
     }
 }
