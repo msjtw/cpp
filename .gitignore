@@ -13,3 +13,5 @@ lekcje/plecak/dynamiczny/ogolny.exe
 lekcje/plecak/zachlanny/decyzyjny.exe
 lekcje/plecak/zachlanny/ogolny.exe
 in.in
+tests/
+.gitignore
