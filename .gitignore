@@ -1,6 +1,5 @@
 zz_exe/
 lekcje/txt/
-.vscode/
 PA2020/1/1b.in
 lekcje/pliki_tekstowe
 lekcje/pliki tekstowe 2
@@ -15,7 +14,7 @@ lekcje/plecak/zachlanny/ogolny.exe
 in.in
 tests/
 in.in
-.gitignore
 in.in
 out.out
 in2.in
+debug.in
