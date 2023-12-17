@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import multiprocessing
 
 @dataclass
 class val_map:
@@ -8,49 +9,53 @@ class val_map:
 
 inp = []
 seeds = []
+n =7
+
+def calc(rules, seeds):
+    res = 1e10
+    for i in range(n):
+        new_seeds = []
+        for seed in seeds:
+            for rule in rules[i]:
+                if(seed >= rule.a and seed < rule.a+rule.r):
+                    seed = seed + (rule.b-rule.a)
+                    break
+            new_seeds.append(seed)
+
+        seeds = new_seeds
+    for seed in seeds:
+        res = min(res, seed)
+    print(res)
+
 
 inp = input().split()
-inp = [eval(i) for i in inp]
+inp = [int(i) for i in inp]
 
-for i in range(0,len(inp),2):
-    for k in range(inp[i], inp[i]+inp[i+1]):
-        seeds.append(k)
-
-print(seeds)
-
-n =7
-while True:
-    rules = []
+rules = [[] for j in range(n)]
+print(rules)
+for i in range(n):
     while True:
         l = input()
         if l == "":
             break
         l = l.split()
-        rules.append(val_map(a = int(l[1]), b =int(l[0]), r = int(l[2])))
+        rules[i].append(val_map(a = int(l[1]), b =int(l[0]), r = int(l[2])))
 
-    if len(rules) == 0:
-       break
 
-    # print(len(rules))
-    # for rule in rules:
-    #     print(rule)
+print(rules)
 
-    # print("")
-
-    new_seeds = []
-
-    for seed in seeds:
-        for rule in rules:
-            if(seed >= rule.a and seed < rule.a+rule.r):
-                seed = seed + (rule.b-rule.a)
-                break
-        new_seeds.append(seed)
-
-    seeds = new_seeds
-
-# res = seeds[0]
-res = 0
-for seed in seeds:
-    res = min(res, seed)
-
-print(res)
+for i in range(0,len(inp),4):
+    # seeds = calc(rules, inp[i], inp[i+1])
+    print(i)
+    seeds1 = []
+    for seed in range(inp[i], inp[i]+inp[i+1]):
+        seeds1.append(seed)
+    seeds2 = []
+    for seed in range(inp[i+2], inp[i+2]+inp[i+3]):
+        seeds2.append(seed)
+    p1 = multiprocessing.Process(target=calc, args=(rules, seeds1, )) 
+    p2 = multiprocessing.Process(target=calc, args=(rules, seeds2, )) 
+    p1.start() 
+    p2.start()
+    p1.join() 
+    p2.join() 
