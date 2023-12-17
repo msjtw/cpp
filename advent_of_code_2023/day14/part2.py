@@ -50,39 +50,67 @@ def right(arr):
                     j += 1
     return arr
 
-def same(a, b):
-    for i in range(len(a)):
-        for k in range(len(a[0])):
-            if a[i][k] != b[i][k]:
-                return True
-    return False
+def Reverse(tup):
+    new_tup = tup[::-1]
+    return new_tup
+
+def press(arr):
+    res = 0
+    arr = list(zip(*arr[::-1]))
+
+    for i in range(len(arr)):
+        arr[i] = Reverse(arr[i])
+
+    for line in arr:
+        l = len(line)
+        l2 = l
+        for c in line:
+            if c == 'O':
+                res += l2
+            l2 -= 1
+    return res
+
+
 
 for line in stdin:
     line = line[:-1]
     arr.append([*line])
 
-cycles = 1
 
-arr2 = copy.deepcopy(arr)
+for i in  range(int(1000)):
+    arr = up(arr)
+    # print(press(copy.deepcopy(arr)))
+    arr = left(arr)
+    # print(press(copy.deepcopy(arr)))
+    arr = down(arr)
+    # print(press(copy.deepcopy(arr)))
+    arr = right(arr)
 
-arr2 = up(arr2)
-arr2 = left(arr2)
-arr2 = down(arr2)
-arr2 = right(arr2)
-# for line in arr2:
-#     print(line)
-
-while same(arr, arr2):
-    arr2 = up(arr2)
-    arr2 = left(arr2)
-    arr2 = down(arr2)
-    arr2 = right(arr2)
-    cycles += 1
-    print(cycles)
-    # for line in arr2:
+    print(press(copy.deepcopy(arr)))
+    # for line in arr:
     #     print(line)
+    # print()
 
-for line in arr2:
-    print(line)
+# cycles = 1
 
-print(cycles)
+# arr2 = copy.deepcopy(arr)
+
+# arr2 = up(arr2)
+# arr2 = left(arr2)
+# arr2 = down(arr2)
+# arr2 = right(arr2)
+# # for line in arr2:
+# #     print(line)
+
+# while press(arr) != press(arr2):
+#     arr2 = up(arr2)
+#     arr2 = left(arr2)
+#     arr2 = down(arr2)
+#     arr2 = right(arr2)
+#     cycles += 1
+#     print(cycles)
+#     # for line in arr2:
+#     #     print(line)
+
+
+# print(cycles)
