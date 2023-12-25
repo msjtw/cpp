@@ -1,47 +1,61 @@
 #include <iostream>
-#include <vector>pl
+#include <vector>
 
 using namespace std;
 
-int solve(string s, vector<int> gr){
-    s = "?" + s;
-    int dp[1000][1000] {};
-    for(int i = 1; i < gr.size(); i++){
-        for(int k = 1; k < s.length(); k++){
-            if(k - gr[i] >= 0){
-                if(s[k] != '.'){
-                    if(s[k-gr[i]] != '#'){
-                        string s2 = s.substr(k-gr[i]+1,gr[i]);
-                        int nhash = gr[i];
-                        for(auto a : s2)
-                            if(a == '.')
-                                nhash--;
-                        if(nhash == gr[i]){
-                            dp[i][k] = dp[i][k-gr[i]] +1;
-                        }
-                    }
-                }
-            }
-        }
+void all(string s, int i, vector<string>& per){
+    if(i == s.size()){
+        per.push_back(s);
+        return;
+    }
+    if(s[i] == '?'){
+        s[i] = '#';
+        all(s, i+1, per);
+        s[i] = '.';
+        all(s, i+1, per);
+    }
+    else{
+        all(s, i+1, per);
     }
 }
 
 int main(){
+    int p;
     int res = 0;
-    int n;
-    cin >> n;
-    for(int i = 0; i < n; i++){
-        string s;
-        cin >> s;
-        int m;
-        cin >> m;
-        vector<int>groups ;
-        groups.push_back(0);
-        for(int k =0; k < m; k++){
+    cin >> p;
+    while(p --> 0){
+        string row;
+        cin >> row;
+        int gr;
+        cin >> gr;
+        vector<int> groups;
+        for(int i = 0; i < gr; i++){
             int a;
-            cin >> a;
+            cin  >> a;
             groups.push_back(a);
         }
-        res += solve(s, groups);
+        vector<string> per;
+        all(row, 0, per);
+        for(string ver : per){
+            vector<int> groups2;
+            int len = 0;
+            for(int i = 0 ; i < ver.length(); i++){
+                if(ver[i] == '#'){
+                    len++;
+                }
+                else{
+                    if(len > 0)
+                        groups2.push_back(len);
+                    len = 0;
+                }
+            }
+            if(len > 0)
+                groups2.push_back(len);
+            if(groups == groups2)
+                res++;
+        }
+        
     }
+    cout << res;
+    return 0;
 }
