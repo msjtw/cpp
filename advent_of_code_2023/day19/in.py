@@ -7,17 +7,16 @@ while True:
         print()
         continue
     if(proc):
-        inp.split("{")
-        # print(inp[0], end=" ")
-        print(inp)
+        inp = inp.split("{")
         line = inp[1][:-1]
-        line.split(',')
+        line = line.split(',')
+        print(inp[0], len(line), end = " ")
         for rule in line:
             print(rule, end=' ')
         print()
     else:
         line = inp[1:-1]
-        line.split(',')
+        line = line.split(',')
         for a in line:
-            print(a, end=" ")
+            print(a[2:], end=" ")
         print()

@@ -1,47 +1,52 @@
 #include <iostream>
+#include <map>
 #include <vector>
-#include <thread>
 
 using namespace std;
 
-int res = 0;
+typedef long long int ll;
 
-int memo[1000] {};
+long long int res = 0;
 
-int all(string s, int i, vector<int>& groups){
-    if(memo[i] != -1)
-        return memo[i];
-    int ret = 0;
-    if(i == s.size()){
-        vector<int> groups2;
-        int len = 0;
-        for(int i = 0 ; i < s.length(); i++){
-            if(s[i] == '#'){
-                len++;
-            }
-            else{
-                if(len > 0)
-                    groups2.push_back(len);
-                len = 0;
-            }
+map<string, map<vector<int>, ll>> memo;
+
+ll all(string row, vector<int> groups){
+    if(memo.count(row) > 0){
+        if(memo[row].count(groups) > 0){
+            return memo[row][groups];
         }
-        if(len > 0)
-            groups2.push_back(len);
-        if(groups == groups2)
-            ret = 1;
-        ret = 0;
     }
-    else if(s[i] == '?'){
-        s[i] = '#';
-        res += all(s, i+1, groups);
-        s[i] = '.';
-        res += all(s, i+1, groups);
+
+    if(row == ""){
+        if(groups.empty())
+            return 1;
+        return 0;
     }
-    else{
-        res += all(s, i+1, groups);
+    if(groups.empty()){
+        if(row.find('#') == string::npos)
+            return 1;
+        return 0;
     }
-    memo[i] = ret;
+
+    ll ret = 0;
+
+    if(row[0] != '.'){
+        bool len = row.length() >= groups[0];
+        bool can_fit = row.substr(0,min(groups[0],(int)row.length())).find('.') == string::npos;
+        bool del_next = (row.length() == groups[0]) or (len and row[groups[0]] != '#');
+        if(len and can_fit and del_next){
+            vector<int> args (groups.begin()+1,groups.end());
+            ret += all(row.substr(min(groups[0] + 1,(int)row.length())), args);
+        }
+
+    }
+    if(row[0] != '#'){
+        ret += all(row.substr(1), groups);
+    }
+ 
+    memo[row][groups] = ret;
     return ret;
+
 }
 
 int main(){
@@ -76,14 +81,7 @@ int main(){
 
 
     for(int i = 0; i < rows.size(); i++){
-        for(int i = 0; i < 1000; i++){
-            memo[i] = -1;
-        }
-        cout << rows[i] << endl;
-        for(int a : groups[i])
-            cout << a << " ";
-        cout << endl; 
-        res += all(rows[i], 0, groups[i]);
+        res += all(rows[i], groups[i]);
     }
 
     cout << res;
