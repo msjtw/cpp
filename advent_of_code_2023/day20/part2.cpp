@@ -33,7 +33,9 @@ int main(){
     
     int presses = 0;
 
-    while(true){
+    int pr = 4096;
+
+    while(pr --> 0){
         presses++;
         queue<pair<string, int>> q;
         q.push({"broadcaster", 0});
@@ -82,8 +84,12 @@ int main(){
                 }
             }
         }
-        if(presses % 1000000 == 0)
-            return 0;
+        cout  << presses  << ": " << endl << state["vq"] << state["xj"] << state["xq"] << state["zf"] << state["xs"] << state["kk"] << state["ch"] << state["nl"]  << state["hz"] << state["gp"] << state["lx"] << state["fx"] << endl;
+        cout  << state["jv"] << state["hh"] << state["vv"] << state["xc"] << state["nn"] << state["tl"] << state["jr"] << state["rs"]  << state["vj"] << state["hq"] << state["qg"] << state["lf"] << endl;
+        cout  << state["hm"] << state["qn"] << state["zc"] << state["dn"] << state["pd"] << state["gq"] << state["kc"] << state["kx"]  << state["bz"] << state["kj"] << state["tc"] << state["nd"] << endl;
+        cout << state["st"] << " " << state["bn"] << " " << state["lg"] << endl;
+        cout << state["zb"] << " " << state["bs"] << " " << state["rr"] << endl;
+        cout << state["hb"] << endl;
     }
 
     return 0;
