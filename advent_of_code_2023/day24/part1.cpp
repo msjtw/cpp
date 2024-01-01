@@ -4,10 +4,10 @@
 using namespace std;
 
 vector<pair<double,double>> lines;
-vector<pair<double,double>> limits;
+vector<pair<double,double>> start;
 
-const double MINI = 200000000000000;
-const double MAXI = 400000000000000;
+const double MINI = 200000000000000.0;
+const double MAXI = 400000000000000.0;
 
 // const double MINI = 7;
 // const double MAXI = 27;
@@ -23,12 +23,7 @@ int main(){
         double a = vy/vx;
         double b = y - (a*x);
         lines.push_back({a, b});
-        if(vx > 0){
-            limits.push_back({x,MAXI});
-        }
-        else{
-            limits.push_back({MINI,x});
-        }
+        start.push_back({x, vx});
     }
 
     int res = 0;
@@ -40,10 +35,13 @@ int main(){
             double x = (b.second-a.second)/(a.first-b.first);
             double y = a.first * x + a.second;
 
-            double mi = max(limits[i].first, limits[k].first);
-            double ma = min(limits[i].second, limits[k].second);
+            double t1 = (x - start[i].first) / start[i].second;
+            double t2 = (x - start[k].first) / start[k].second;
 
-            if(x > mi and x < ma and y > MINI and y < MAXI)
+            if(t1 < 0 or t2 < 0)
+                continue;
+
+            if(x > MINI and x < MAXI and y > MINI and y < MAXI)
                 res++;
         }
     }
