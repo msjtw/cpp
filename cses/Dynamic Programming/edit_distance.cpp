@@ -22,7 +22,7 @@ int main(){
         }
     }
 
-    // for(int i = s1.length(); i >= 0; i--){
+    // for(int i = 0; i <= s1.length(); i++){
     //     for(int k = 0; k <= s2.length(); k++){
     //         cout << dp[i][k] << " ";
     //     }
