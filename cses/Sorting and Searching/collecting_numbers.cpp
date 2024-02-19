@@ -9,7 +9,7 @@ int arr[SIZE];
 int res = 1;
 
 int main(){
-    int n;
+    int n;W
     cin >> n;
     while(n --> 0){
         int a;
