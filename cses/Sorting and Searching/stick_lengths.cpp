@@ -1,11 +1,12 @@
 #include<iostream>
 #include<vector>
-#include<cmath>
+#include<algorithm>
 
 using namespace std;
 
 vector<int> all;
-long long int total_len = 0;
+vector<int> med;
+
 
 int main(){
     int n;
@@ -13,17 +14,19 @@ int main(){
     for(int i = 0; i< n; i++){
         int a;
         cin >> a;
-        total_len += a;
         all.push_back(a);
+        med.push_back(a);
     }
-    int avg1 = total_len / n;
-    int avg2 = ceil(total_len/(double)n);
-    long long int res1 = 0;
-    long long int res2 = 0;
+    sort(med.begin(), med.end());
+
+    int m = med[med.size()/2];
+    long long int res = 0;
+
     for(int a : all){
-        res1 += abs(avg1 - a);
-        res2 += abs(avg2 - a);
+        res += abs(a-m);
     }
-    cout << min(res1, res2);
+
+    cout << res;
+
     return 0;
 }
