@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<queue>
+#include<tuple>
 
 using namespace std;
 
@@ -10,8 +11,8 @@ const int SIZE = 1e5+7;
 
 vector<pair<int,int>> adj[SIZE];
 
-pair<ll, int> dist[SIZE] {};
-bool vis[SIZE] {};
+ll dist[SIZE][2] {};
+bool vis[SIZE][2] {};
 
 int main(){
     int n, m;
@@ -23,27 +24,35 @@ int main(){
     }
     
     for(int i = 0; i < SIZE; i++){
-        dist[i] = {__INT64_MAX__, 0};
+        dist[i][0] = __INT64_MAX__;
+        dist[i][1] = __INT64_MAX__;
     }
 
-    priority_queue<pair<ll, int>> q;
-    dist[1] = {0, 0};
-    q.push({0,1});
+    priority_queue<tuple<ll, int, int>> q;
+    dist[1][0] = 0;
+    q.push(make_tuple(0LL,1,0));
     while(!q.empty()){
-        int a = q.top().second;
+        int d, u, a;
+        tie(d, a, u) = q.top();
         q.pop();
-        //if(vis[a]) continue;
-        vis[a] = true;
+        if(vis[a][u]) continue;
+        vis[a][u] = true;
         for(auto v : adj[a]){
             int b = v.first;
             int w = v.second;
-            if((dist[a].first + w - (max(dist[a].second, w) - max(dist[a].second, w)/2)) < (dist[b].first - dist[b].second/2)){
-                dist[b] = {dist[a].first + w, max(dist[a].second, w)};
-                q.push({-(dist[a].first + w - (max(dist[a].second, w) - max(dist[a].second, w)/2)) , b});
+            if(dist[a][u] + w < dist[b][u]){
+                dist[b][u] = dist[a][u] + w;
+                q.push(make_tuple(-dist[b][u], b, u));
+            }
+            if(u == 0){
+                if(dist[a][0] + w/2 < dist[b][1]){
+                    dist[b][1] = dist[a][0] + w/2;
+                    q.push(make_tuple(-dist[b][1], b, 1));
+                }
             }
         }
     }
 
-    cout << dist[n].first - (dist[n].second - dist[n].second/2);
+    cout << dist[n][1];
 
 }
