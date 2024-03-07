@@ -7,6 +7,17 @@ const int MX = 2e5+7;
 
 vector<int> adj[MX];
 
+int len[MX][2];
+
+void length_th(int x, int e, int v){
+    len[x][0] = v;
+    for(int b : adj[x]){
+        if(b != e){
+            length_th(b, x, v+1);
+        }
+    }
+}
+
 int main(){
     int n;
     cin >> n;
