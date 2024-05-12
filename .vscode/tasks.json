@@ -6,6 +6,8 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
+                "-Wall",
+                "-Wextra",
                 "-g",
                 "${file}",
                 "-o",
