@@ -23,3 +23,5 @@ y_coords = [vertex[1] for vertex in vertices]
 plt.plot(x_coords, y_coords, '.-')
 plt.axis('equal')
 plt.show()
+
+
