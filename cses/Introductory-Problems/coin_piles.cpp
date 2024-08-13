@@ -8,10 +8,11 @@ int main(){
     while(p --> 0){
         int a, b;
         cin >> a >> b;
-        if(!(a&1) and !(b&1))
-            cout << "NO";
-        else
-            cout << "YES";
-        cout << endl;
+        if((2*a >= b and a <= 2*b and (a+b)%3 == 0)){
+            cout << "YES\n";
+        }
+        else{
+            cout << "NO\n";
+        }
     }
 }
