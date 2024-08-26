@@ -11,15 +11,11 @@ ll res= 0;
 int main(){
     ll n;
     cin >> n;
-    for(ll i = 1; i*i <= n; i++){
-        if(n%i == 0){
-            cout << i << " " << n/i << " ";
-            res += i;
-            res %= MOD;
-            if(i*i != n)
-                res += (n/i);
-            res %= MOD;
-        }
+    for(int i = 1; i*i <= n; i++){
+        ll count = n/i;
+        if()
+        ll add = (count * i)%MOD;
+        res = (res + add)%MOD;
     }
     cout << res;
     return 0;

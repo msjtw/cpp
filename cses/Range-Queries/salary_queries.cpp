@@ -1,10 +1,21 @@
 #include<iostream>
+#include<vector>
+#include<tuple>
+#include<set>
 
 using namespace std;
 
 typedef long long int ll;
+typedef pair<int,int> pii;
+typedef tuple<char,int,int> tcii;
 
-const int BASE = 1<<18;
+const int BASE = 1<<20;
+
+
+vector<int> compr;
+set<int> sc;
+vector<int> salaries; 
+vector<tcii> queries;
 
 int emp[BASE];
 int sal[2*BASE];
@@ -35,27 +46,65 @@ int query(int p, int q){
     return ret;
 }
 
+int idx_map(int a){
+    int k = 0;
+    for(int b = compr.size()/2; b > 0; b/=2){
+        while(k+b < compr.size() and compr[k+b] <= a)
+            k += b;
+    }
+    if(compr[k] == a)
+        return k;
+    else{
+        return -1;
+    }
+}
+
 int main(){
+    ios_base::sync_with_stdio(false);
     int n, q;
     cin >> n >> q;
-    for(int i = 1; i <= n; i++){
+    for(int i = 1 ; i <= n; i++){
         int a;
-        cin >> a ;
-        emp[i] = a;
-        add(a, 1);
+        cin >> a;
+        salaries.push_back(a);
+        sc.insert(a);
     }
-
     for(int i = 0 ; i < q; i++){
         char op;
         int a, b;
         cin >> op >> a >> b;
+        queries.push_back({op,a,b});
+        sc.insert(a);
+        sc.insert(b);
+    }
+
+    auto it = sc.begin();
+    while(it != sc.end()){
+        compr.push_back(*it);
+        it++;
+    }
+
+    for(int i = 1; i <= n; i++){
+        int a;
+        a = salaries[i-1];
+        emp[i] = a;
+        a = idx_map(a);
+        add(a, 1);
+    }
+
+    for(tcii quer : queries){
+        char op;
+        int a, b;
+        tie(op, a, b) = quer;
         if(op == '!'){
-            add(emp[a], -1);
+            add(idx_map(emp[a]), -1);
             emp[a] = b;
-            add(emp[a], 1); 
+            add(idx_map(emp[a]), 1); 
         }
         else{
-            cout << query(a, b) << " ";
+            a = idx_map(a);
+            b = idx_map(b);
+            cout << query(a, b) << "\n";
         }
     }
 
