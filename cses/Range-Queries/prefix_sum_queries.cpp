@@ -4,88 +4,123 @@ using namespace std;
 
 typedef long long int ll;
 
-const int BASE = 1<<18;
+const int BASE = 1<<19;
+const int MX = 2e5+7;
 ll INF = __INT64_MAX__;
 
-ll sum_tree[2*BASE];
-ll pref_tree[2*BASE];
+ll max_tree[2*BASE][2];
+ll sum_tree[2*BASE][2];
+int val[MX];
 
-void pref_ins(int);
-
-void sum_ins(int x, int pp){
-    int p = pp + BASE;
-    sum_tree[p] = x;
-    p>>=1;
-    while(p){
-        sum_tree[p] = sum_tree[2*p] + sum_tree[2*p+1];
-        p>>=1;
+void max_add(int a, int b, int val, int k=1, int x=0, int y=BASE-1){
+    if(a <= x and y <= b){
+        max_tree[k][1] += val;
+        return;
     }
-    pref_ins(pp);
+    max_tree[2*k][1] += max_tree[k][1];
+    max_tree[2*k+1][1] += max_tree[k][1];
+    max_tree[k][0] += max_tree[k][1];
+    max_tree[k][1] = 0;
+
+    int d = (x+y)/2;
+    if(a <= d){
+        max_add(a, b, val, 2*k, x, d);
+        }
+    if(b > d){
+        max_add(a, b, val, 2*k+1, d+1, y);
+    }
+    max_tree[k][0] = max(max_tree[2*k+1][0] + max_tree[2*k+1][1], max_tree[2*k][0] + max_tree[2*k][1]);
+
 }
 
-ll sum_query(int a, int b){
-    a += BASE-1;
-    b += BASE+1;
-    ll res = 0;
-    while(a >> 1 != b >> 1){
-        if(!(a&1))
-            res += sum_tree[a+1];
-        if(b&1)
-            res += sum_tree[b-1];
-        a>>=1;
-        b>>=1;
+ll max_query(int a, int b, int k=1, int x=0, int y=BASE-1){
+    if(a <= x and y <= b){
+        return max_tree[k][0] + max_tree[k][1];
     }
-    return res;
-}
+    max_tree[2*k][1] += max_tree[k][1];
+    max_tree[2*k+1][1] += max_tree[k][1];
+    max_tree[k][0] += max_tree[k][1];
+    max_tree[k][1] = 0;
 
-void pref_ins(int p){
-    int a = sum_query(0, p);
-    p += BASE;
-    pref_tree[p] = a;
-    p>>=1;
-    while(p){
-        pref_tree[p] = max(pref_tree[2*p], pref_tree[2*p+1]);
-        p>>=1;
-    }
-}
-
-ll pref_query(int a, int b){
+    int d = (x+y)/2;
     ll ret = -INF;
-    a += BASE-1;
-    b += BASE+1;
-    while(a >> 1 != b >> 1){
-        if(!(a&1))
-            ret = max(ret, pref_tree[a+1]);
-        if(b&1)
-            ret = max(ret, pref_tree[b-1]);
-        a >>= 1;
-        b >>= 1;
+    if(a <= d){
+        ret = max(ret, max_query(a, b, 2*k, x, d));
+    }
+    if(b > d){
+        ret = max(ret, max_query(a, b, 2*k+1, d+1, y));
     }
     return ret;
 }
 
-int main(){
-    for(int i = 0 ; i < 2*BASE; i++)
-        pref_tree[i] = -INF;
+void sum_add(int a, int b, int val, int k=1, int x=0, int y=BASE-1){
+    if(a <= x and y <= b){
+        sum_tree[k][1] += val;
+        return;
+    }
+    sum_tree[2*k][1] += sum_tree[k][1];
+    sum_tree[2*k+1][1] += sum_tree[k][1];
+    sum_tree[k][0] += sum_tree[k][1]*(y-x+1);
+    sum_tree[k][1] = 0;
 
+    int d = (x+y)/2;
+    if(a <= d){
+        int w = (d <= b ? d : b)+1;
+        w -= (x <= a ? a : x);
+        sum_tree[k][0] += val*(w);
+        sum_add(a, b, val, 2*k, x, d);
+    }
+    if(b > d){
+        int w = (y <= b ? y : b)+1;
+        w -= (d+1 <= a ? a : d+1);
+        sum_tree[k][0] += val*(w);
+        sum_add(a, b, val, 2*k+1, d+1, y);
+    }
+}
+
+ll sum_query(int a, int b, int k=1, int x=0, int y=BASE-1){
+    if(a <= x and y <= b){
+        return sum_tree[k][0] + sum_tree[k][1]*(y-x+1);
+    }
+    sum_tree[2*k][1] += sum_tree[k][1];
+    sum_tree[2*k+1][1] += sum_tree[k][1];
+    sum_tree[k][0] += sum_tree[k][1]*(y-x+1);
+    sum_tree[k][1] = 0;
+
+    int d = (x+y)/2;
+    ll ret = 0;
+    if(a <= d){
+        ret += sum_query(a, b, 2*k, x, d);
+    }
+    if(b > d){
+        ret += sum_query(a, b, 2*k+1, d+1, y);
+    }
+    return ret;
+}
+
+
+int main(){
     int n, q;
     cin >> n >> q;
-    for(int i = 0; i < n; i++){
-        int a;
-        cin >> a;
-        sum_ins(a, i);
-    }   
-    for(int i = BASE; i < BASE +  n; i++)
-        cout << pref_tree[i] << " ";
+    for(int i = 1; i <= n; i++){
+        cin >> val[i];
+        max_add(i,n,val[i]);
+        sum_add(i,n,val[i]);
+    }
 
     while(q-->0){
-        int op, a, b;
+        ll op, a, b;
         cin >> op >> a >> b;
         if(op == 1){
-            sum_ins(b, a-1);
+            ll diff = b - val[a];
+            val[a] = b;
+            max_add(a,n,diff);
+            sum_add(a,n,diff);
         }
         else{
-            cout << pref_query(a-1, b-1) << endl;
+            ll r1 = max_query(a, b);
+            ll r2 = sum_query(a-1,a-1);
+            cout << max(r1-r2, 0LL) << endl;
         }
     }
 

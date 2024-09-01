@@ -3,29 +3,42 @@
 using namespace std;
 
 typedef long long int ll;
+typedef pair<int,int> pii;
+
+int cross(pii a, pii b, pii c){
+    pii va, vb;
+    va.first = b.first-a.first;
+    va.second = b.second-a.second;
+    vb.first = c.first-b.first;
+    vb.second = c.second-b.second;
+    return (ll)va.first*vb.second - (ll)vb.first*va.second;
+}
+
+bool ins(pii a, pii b, pii c, pii d){}
+
 
 int main(){
-    int t;
-    int x1,x2,x3,x4,y1,y2,y3,y4;
-    cin >> t;
-    while(t-->0){
-        cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-        ll a1 = (ll)(y2-y1)*(x4-x3);
-        ll a2 = (ll)(y4-y3)*(x2-x1);
-        cout << a1 << " " << a2 << endl;
-        if(a1 == a2){
-            ll a3 = (ll)(y4-y3)*(x4-x3);
-            ll a4 = (ll)(y2-y1)*(x2-x1);
-            if(a3 == a4){
-                cout << "YES\n";
-            }
-            else{
-                cout << "NO\n";
-            }
-        }
-        else{
+    int q;
+    cin >> q;
+    while(q --> 0){
+        pii a, b, c, d;
+        cin >> a.first >> a.second;
+        cin >> b.first >> b.second;
+        cin >> c.first >> c.second;
+        cin >> d.first >> d.second;
+        if(a == c or a == d or b == c or b == d){
             cout << "YES\n";
         }
+        else if(cross(a,b,c) != cross(a,b,d) and cross(c,d,a) != cross(c,d,b)){
+            cout << "YES\n";
+        }
+        else if((cross(a,b,c) == 0 or cross(a,b,d) == 0 or cross(c,d,a) == 0 or cross(c,d,b) == 0) and ins(a,b,c,d)){
+            cout << "YES\n";
+        }
+        else{
+            cout << "NO\n";
+        }
     }
+
     return 0;
 }
