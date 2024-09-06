@@ -1,70 +1,59 @@
-#include<iostream>
-#include<vector>
-#include<bitset>
-#include<algorithm>
- 
+#include <iostream>
+#include <vector>
+/* #include <bitset> */
+
 using namespace std;
- 
-const int MX = 21;
+
+typedef long long int ll;
+
 const int MOD = 1e9+7;
+const int MX = 21;
 
 vector<int> adj[MX];
-vector<int> radj[MX];
- 
-long long int res[1<<MX][MX];
- 
-bool cmp(int left, int right){
-    bitset<MX> l(left);
-    bitset<MX> r(right);
-    return l.count() < r.count();
+int dp[1<<MX][MX];
+
+int n, m;
+int solve(int mask, int a){
+    /* cout << bitset<MX>(mask).to_string().substr(MX-n) << " " << a << endl; */
+    if(dp[mask][a] > -1)
+        return dp[mask][a];
+    if(a == n){
+        if(mask == (1<<n)-1)
+            return 1;
+        else
+            return 0;
+    }
+    ll ret = 0;
+    for(int b : adj[a]){
+        int b_bit = 1 << (b-1);
+        if(mask & b_bit)
+            continue;
+        /* cout << a << "-->" << b << endl; */
+        int new_mask = mask | b_bit;
+        ret += solve(new_mask, b);
+        ret %= MOD;
+    }
+    dp[mask][a] = ret;
+    return ret;
+}
+
+void zero(){
+    for(int i = 0; i < 1<<MX; i++){
+        for(int k = 0; k < MX; k++){
+            dp[i][k] = -1;
+        }
+    }
 }
 
 int main(){
-    int n, m;
     cin >> n >> m;
-    for(int i = 0; i < m; i++){
+    for(int i = 0 ; i < m; i++){
         int a, b;
         cin >> a >> b;
         adj[a].push_back(b);
-        radj[b].push_back(a);
     }
- 
-    vector<int> nums;
-    int tmp = 1;
-    while(tmp != 1<<n){
-        nums.push_back(tmp++);
-    }
+    zero();
+    cout << solve(1, 1);
 
-    sort(nums.begin(), nums.end(), cmp);
-
-    for(int curr : nums){
-        bitset<MX> curr_bit(curr);
-        //cout << curr_bit.to_string() << "\t";
-        for(int i = 0; i < MX; i++){ 
-            if(curr_bit[i] == 1){
-                bitset<MX> tmp_bit = curr_bit;
-                tmp_bit[i] = false;
-                if(tmp_bit.to_ulong() == 0){
-                    res[curr_bit.to_ulong()][i+1] = 1;
-                }
-                for(int x : radj[i+1]){
-                    res[curr_bit.to_ulong()][i+1] = (res[curr_bit.to_ulong()][i+1] + res[tmp_bit.to_ulong()][x])%MOD;
-                    //res[curr_bit.to_ulong()][i+1] %= MOD;
-                }
-            }
-        }
-    }
-
-    // for(auto a : nums){
-    //     bitset<MX> curr_bit(a);
-    //     cout << curr_bit.to_string() << "\t";
-    //     for(int k = 0; k <= n; k++){
-    //         cout << res[a][k] << "\t";
-    //     }
-    //     cout << endl;
-    // }
- 
-    cout << res[(1<<n)-1][n];
- 
     return 0;
 }
