@@ -2,7 +2,11 @@
 
 using namespace std;
 
-int arr
+typedef long long int ll;
+
+const int MX = 1e9+7;
+
+
 
 int main(){
     int n;
@@ -10,6 +14,7 @@ int main(){
     for(int i = 0 ; i < n; i++){
         int a, b;
         cin >> a >> b;
+        cout << bncoff()
     }
     return 0;
 }
