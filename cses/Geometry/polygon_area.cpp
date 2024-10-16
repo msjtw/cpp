@@ -23,7 +23,9 @@ int main(){
     for(int i = 0; i < n; i++){
         res += (arr[i].first*arr[i+1].second - arr[i+1].first*arr[i].second);
     }
+for (int i = 0; i < n; i++) {
 
+}
     cout << abs(res);
 
     return 0;

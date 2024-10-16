@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {1}Sorting and Searching}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}4SUM}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Dynamic Programming}{3}{section.2}%
+\contentsline {section}{\numberline {3}Graph Algorithms}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Flows and Cuts}{3}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Maximum Flow}{3}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Minimum Cut}{4}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Maximum Matching}{5}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}2SAT}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Range Queries}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Segment trees}{5}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Point-Range Trees}{5}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Range-Range Trees}{6}{subsubsection.4.1.2}%
+\contentsline {section}{\numberline {5}Tree Algorithms}{7}{section.5}%
+\contentsline {section}{\numberline {6}String Algorithms}{7}{section.6}%
+\contentsline {section}{\numberline {7}Mathematics}{7}{section.7}%
+\contentsline {section}{\numberline {8}Geometry}{7}{section.8}%
+\contentsline {section}{\numberline {9}Other Algorithms}{7}{section.9}%

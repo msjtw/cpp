@@ -41,9 +41,9 @@ int main(){
         insert(uptree, a+i, i);
         insert(downtree, a+n-i+1, i);
     }
-    /* for(int i = BASE; i <= BASE+n; i++) */
-    /*     cout << uptree[i] << " "; */
-    /* cout << endl; */
+    // for(int i = BASE; i <= BASE+n; i++)
+    //     cout << uptree[i] << " ";
+    // cout << endl;
     while(q --> 0){
         int op, a, b;
         cin >> op;

@@ -1,0 +1,113 @@
+\documentclass[13pt]{article}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+
+\title{CP Algorithms Handbook}
+\author{Stanisław Fiedler}
+\date{\today}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+\maketitle
+\pagebreak
+
+% Optionala 
+\tableofcontents
+\pagebreak
+
+\section{Sorting and Searching}
+
+\subsection{4SUM}
+
+\section{Dynamic Programming}
+
+\section{Graph Algorithms}
+
+\subsection{Flows and Cuts}
+All problems in this section can be solved using the same basic algorithm defined in \ref{sec:MAXFLOW}.
+
+\subsubsection{Maximum Flow}
+\label{sec:MAXFLOW}
+This implementation of Ford-Fulkerson algorithm (known as Edmonds-Karp algorithm) uses BFS to check if it's possible to expand the flow through the graph and assign depths from the source. Later it uses DFS to expand te flow.
+\lstinputlisting[language=C++, firstline=11, lastline=66]{code_snippets/max_flow}
+
+To find the flow:
+\lstinputlisting[language=C++, firstline=89, lastline=97]{code_snippets/max_flow}
+
+\subsubsection{Minimum Cut}
+To find Minimum Cut in a graph we need to find the Maximum Flow and check which edges connect two created disjont sets of nodes. This modification to finds them:
+\lstinputlisting[language=C++, firstline=92, lastline=116]{code_snippets/min_cut}
+\subsubsection{Maximum Matching}
+
+\subsection{2SAT}
+
+Given logical formula in the conjunctive normal form:
+\[ (a_1 \vee b_1) \wedge  (a_2 \vee b_2) \wedge ... \wedge (a_{n} \vee b_{n})\]
+we can eliminate disjunction by repacing each \( (a_i \vee b_i) \) element with pair:
+\[ \neg a_i \rightarrow b_i \wedge \neg b_i \rightarrow a_i \]
+
+\section{Range Queries}
+
+\subsection{Segment trees}
+
+BASE size table:
+\begin{center}
+	\begin{tabular}{ c || c | c | c }
+		a          & \(2 \cdot 10^5\) & \(5 \cdot 10^5\) & \(10^6\) \\
+		\hline\hline
+		\(log_2a\) & 18               & 19               & 20
+	\end{tabular}
+\end{center}
+
+\subsubsection{Point-Range Trees}
+\lstinputlisting[language=C++, firstline=84,lastline=91]{code_snippets/segment_trees}
+\lstinputlisting[language=C++, firstline=93,lastline=107]{code_snippets/segment_trees}
+
+\subsubsection{Range-Range Trees}
+\begin{enumerate}
+	\item range ADD insert, range MAX value query
+	      \lstinputlisting[language=C++, firstline=1,lastline=20]{code_snippets/segment_trees}
+	      \lstinputlisting[language=C++, firstline=22,lastline=39]{code_snippets/segment_trees}
+	\item range ADD insert, range SUM qyerry
+	      \lstinputlisting[language=C++, firstline=41,lastline=63]{code_snippets/segment_trees}
+	      \lstinputlisting[language=C++, firstline=65,lastline=83]{code_snippets/segment_trees}
+\end{enumerate}
+\section{Tree Algorithms}
+\section{String Algorithms}
+\section{Mathematics}
+\section{Geometry}
+
+% section Geometry (end)
+\section{Other Algorithms}
+
+
+%--/Paper--
+
+\end{document}
