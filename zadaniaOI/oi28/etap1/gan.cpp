@@ -1,91 +1,88 @@
-// Stanislaw Fiedler VIII LO Poznan
-
 #include <iostream>
 #include <vector>
-#include <queue>
+#include <set>
+#include <tuple>
 
 using namespace std;
 
-struct as{
-    int cel;
-    int numer;
-};
+typedef long long int ll;
+typedef tuple<int, int, int> tiii;
 
-struct miasto{
-    int ak;
-    int pop;
-};
+const int MX = 1e5+7;
+const int BASE = 1<<17;
 
-vector <vector<as>> lis;
+vector<tiii> adj[MX];
+multiset<int> tree[BASE<<1];
+int flat[MX];
+int subtree[MX]; // subtree size
+int vals[MX];
+int roads_to_nodes[MX];
 
-int gnomy[150010];
+int idx = 1;
+int dfs(int a, int p){
+    flat[a] = idx;
+    idx ++;
+    for(tiii nxt : adj[a]){
+        int b, w, r_num;
+        tie(b, w, r_num) = nxt;
+        if(b == p)
+continue;
+        vals[b] = w;
+        roads_to_nodes[r_num] = b;
+        subtree[a] += dfs(b, a)+1;
+    }
+    return subtree[a];
+}
 
-as miasta[100010];
+void add(int a, int b, int v){
+    a += BASE-1;
+    b += BASE+1;
+    while(a >> 1 != b >> 1){
+        if(!(a&1)){
+            tree[a+1].insert(v);
+        }
+        if(b&1){
+            tree[b+1].insert(v);
+        }
+        a >>= 1;
+        b >>= 1;
+    }
+}
 
-int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+void remove(int a, int b, int v){
+    a += BASE-1;
+    b += BASE+1;
+    while(a >> 1 != b >> 1){
+        if(!(a&1)){
+            tree[a+1].erase(v);
+        }
+        if(b&1){
+            tree[b+1].erase(v);
+        }
+        a >>= 1;
+        b >>= 1;
+    }
+}
 
-    int miast, gnomow, p;
-    cin >> miast >> gnomow >> p;
-    lis.resize(miast+10);
+int query(int a){
+    set<int>    
+}
 
-    for(int i = 1; i < miast; i++){
-        int a, b, c;
-        cin >> a >> b >> c;
-        gnomy[i] = c;
-        as d;
-        d.cel = b;
-        d.numer = i;
-        lis[a].push_back(d);
-        d.cel = a;
-        lis[b].push_back(d);
+int main (int argc, char *argv[]) {
+    int n, m, z;
+    cin >> n >> m >> z;
+    for(int i = 0; i < n-1; i++){
+        int a, b, w;
+        cin >> a >> b >> w;
+        adj[a].push_back({b, w, i+1});
+        adj[b].push_back({a, w, i+1});
     }
 
-    queue <miasto> koej;
-    miasto pier;
-    pier.ak = 1;
-    koej.push(pier);
-    while(koej.size() > 0){
-        for(int i = 0; i < lis[koej.front().ak].size(); i++){
-            if(lis[koej.front().ak][i].cel != koej.front().pop){
-                miasto b;
-                b.ak = lis[koej.front().ak][i].cel;
-                b.pop = koej.front().ak;
-                miasta[lis[koej.front().ak][i].cel].cel = koej.front().ak;
-                miasta[lis[koej.front().ak][i].cel].numer =lis[koej.front().ak][i].numer;
-                koej.push(b);
-            }   
-        }
-        koej.pop();
-    }
+    dfs(1, 0);
 
-    while(p--){
-        char op;
-        cin >> op;
-        if(op == 'Z'){
-            int cel;
-            cin >> cel;
-            int moze_kupic[150010] {};
-            int ilosc = 0;
-            as ak = miasta[cel];
-            while(1){
-                moze_kupic[gnomy[ak.numer]]++;
-                if(moze_kupic[gnomy[ak.numer]] == 1)
-                    ilosc++;
-                if(ak.cel == 1)
-                    break;
-                else
-                    ak = miasta[ak.cel];
-            }
-            cout << ilosc << "\n";
-        }
-        else{
-            int num, na_co;
-            cin >> num >> na_co;
-            gnomy[num] = na_co;
-        }
+    for(int i = 1; i <= n; i++){
+        int a = flat[i];
+        add(a,a+subtree[i],vals[i]);
     }
 
     return 0;

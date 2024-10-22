@@ -1,0 +1,5 @@
+    int sub = whole_set;
+    while(sub > 0){
+        
+        sub = (sub-1)&whole_set;
+    }

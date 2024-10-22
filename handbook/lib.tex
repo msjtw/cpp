@@ -2,6 +2,9 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{a4paper, portrait, margin=1in}
 
 
 \title{CP Algorithms Handbook}
@@ -36,6 +39,7 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 \pagebreak
 
 % Optionala 
@@ -48,7 +52,28 @@
 
 \section{Dynamic Programming}
 
+\subsection{State represenation}\label{sub:state_represenation} % (fold)
+
+\subsubsection{All subsets}\label{ssub:all_subsets} % (fold)
+This way you can generate all subsets in order ready for DP.
+\lstinputlisting[language=C++, firstline=1, lastline=5]{code_snippets/dp_states}
+% subsubsection All subsets (end)
+
+\subsubsection{Permutations to Subsets}\label{ssub:permutations_to_subsets} % (fold)
+
+% subsubsection All subsets (end)
+
+% subsection State represenation (end)
+
 \section{Graph Algorithms}
+
+\subsection{Union Find}\label{sub:union_find} % (fold)
+\lstinputlisting[language=C++, firstline=7, lastline=51]{code_snippets/union_find}
+% subsection Union Find (end)
+
+\subsection{Path through all edges}\label{sub:} % (fold)
+\lstinputlisting[language=C++, firstline=1, lastline=67]{code_snippets/euleran_apth}
+% subsection  (end)
 
 \subsection{Flows and Cuts}
 All problems in this section can be solved using the same basic algorithm defined in \ref{sec:MAXFLOW}.
@@ -72,6 +97,8 @@ Given logical formula in the conjunctive normal form:
 \[ (a_1 \vee b_1) \wedge  (a_2 \vee b_2) \wedge ... \wedge (a_{n} \vee b_{n})\]
 we can eliminate disjunction by repacing each \( (a_i \vee b_i) \) element with pair:
 \[ \neg a_i \rightarrow b_i \wedge \neg b_i \rightarrow a_i \]
+
+\lstinputlisting[language=C++, firstline=1, lastline=122]{code_snippets/2sat}
 
 \section{Range Queries}
 
@@ -100,8 +127,56 @@ BASE size table:
 	      \lstinputlisting[language=C++, firstline=65,lastline=83]{code_snippets/segment_trees}
 \end{enumerate}
 \section{Tree Algorithms}
+
+\subsection{Binary Lifitng}\label{sub:binary_lifitng} % (fold)
+\lstinputlisting[language=C++, firstline=24, lastline=35]{code_snippets/trees}
+% subsection Binary Lifitng (end)
+
+\subsection{Tree Traversal}\label{sub:tree_traversal} % (fold)
+\lstinputlisting[language=C++, firstline=1, lastline=16]{code_snippets/trees}
+% subsection Tree Traversal (end)
+
+\subsection{LCA}\label{sub:lca} % (fold)
+
+% subsection LCA (end)
+
 \section{String Algorithms}
+
+\subsection{Trie}\label{sub:trie} % (fold)
+\lstinputlisting[language=C++, firstline=9, lastline=34]{code_snippets/trie}
+% subsection Trie (end)
+
+\subsection{Pattern Finding}\label{sub:pattern_finding} % (fold)
+
+\subsubsection{KMP}\label{ssub:kmp} % (fold)
+\lstinputlisting[language=C++, firstline=7, lastline=29]{code_snippets/strings}
+% subsubsection KMP (end)
+
+\subsubsection{Hashing}\label{ssub:hashing} % (fold)
+
+\lstinputlisting[language=C++, firstline=37, lastline=72]{code_snippets/strings}
+% subsubsection Hashing (end)
+
+% subsection Pattern Finding (end)
+
+\subsection{Palindormes}\label{sub:pal} % (fold)
+Fiding longest palindromic substring.
+\lstinputlisting[language=C++, firstline=75, lastline=107]{code_snippets/strings}
+% subsection Trie (end)
+
 \section{Mathematics}
+
+\subsection{Fermat's Theorem}\label{sub:fermat_s_theorem} % (fold)
+\[
+	\Huge	x^{\varphi(m)}\,mod\,m = x^{k\,mod\,(m-1)}\,mod\,m
+\]
+\lstinputlisting[language=C++, firstline=7, lastline=15]{code_snippets/math}
+% subsection Fermat's Theorem (end)
+
+\subsection{Fast Fibonacci}\label{sub:fast_fibonacci} % (fold)
+\lstinputlisting[language=C++, firstline=39, lastline=74]{code_snippets/math}
+% subsection Fast Fibonacci (end)
+
 \section{Geometry}
 
 % section Geometry (end)
