@@ -1,0 +1,36 @@
+\contentsline {section}{\numberline {1}Sorting and Searching}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}4SUM}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Dynamic Programming}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}State represenation}{3}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}All subsets}{3}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Permutations to Subsets}{3}{subsubsection.2.1.2}%
+\contentsline {section}{\numberline {3}Graph Algorithms}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Union Find}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Path through all edges}{4}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Topo Sort}{5}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Flows and Cuts}{5}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Maximum Flow}{5}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Minimum Cut}{6}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Maximum Matching}{7}{subsubsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.5}2SAT}{7}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Range Queries}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Segment trees}{9}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Point-Range Trees}{9}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Range-Range Trees}{9}{subsubsection.4.1.2}%
+\contentsline {section}{\numberline {5}Tree Algorithms}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Binary Lifitng}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Tree Traversal}{11}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}LCA}{11}{subsection.5.3}%
+\contentsline {section}{\numberline {6}String Algorithms}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Trie}{11}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Pattern Finding}{11}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}KMP}{11}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Hashing}{12}{subsubsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.3}Palindormes}{12}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Mathematics}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Fermat's Theorem}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Fast Fibonacci}{13}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Combinatorics}{14}{subsection.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.1}a}{14}{subsubsection.7.3.1}%
+\contentsline {section}{\numberline {8}Geometry}{14}{section.8}%
+\contentsline {section}{\numberline {9}Other Algorithms}{14}{section.9}%
