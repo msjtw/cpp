@@ -1,0 +1,43 @@
+void merge(int left, int mid, int right, int t[]){
+    int a = left, b = mid;
+    int i = left;
+    while(a < mid && b < right)
+        tab[i++] = (t[a] < t[b] ? t[a++] : t[b++]);
+    while(a < mid)
+        tab[i++] = t[a++];
+    while(b < right)
+        tab[i++] = t[b++];
+    for(int k = left; k < right; k++)
+        t[k] = tab[k];
+}
+
+void mergesort(int left, int right, int t[]){
+    if(left+1 != right){
+        int m = (left+right)/2;
+        mergesort(left, m, t);
+        mergesort(m, right, t);
+        merge(left, m, right, t);
+    }
+}
+
+
+void qwik_sort(int p, int q, int tab[]){
+	int a = p, b = q;
+	int m = tab[(p+q)/2]; 
+	
+	while(a <= b){
+		while(m > tab[a])
+            a++;
+		while(m < tab[b])
+            b--;
+        if(a <= b){
+            swap(tab[a],tab[b]);
+                a++;
+                b--;
+        }
+	}
+	if(b > p)
+	    qwik_sort(p, b, tab);
+	if(a < q)
+	    qwik_sort(a, q, tab);
+}

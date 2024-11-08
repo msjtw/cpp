@@ -1,0 +1,62 @@
+priority_queue<pair<long long int ,int>> q;
+dist[1] = 0;
+q.push({0, 1});
+while(!q.empty()){
+    int a = q.top().second;
+    q.pop();
+    if(vis[a]) continue;
+    vis[a] = true;
+    for(auto v : adj[a]){
+        int b = v.first;
+        int w = v.second;
+        if(dist[b] > dist[a] + w){
+            dist[b] = dist[a] + w;
+            q.push({-dist[b], b});
+        }
+    }
+}
+
+long long int dist[SIZE][SIZE] {};
+for(int i = 0; i <= n; i++){
+    for(int k = 0; k <= n; k++){
+        dist[i][k] = __INT64_MAX__/2;
+    }
+}
+for(int i = 1; i <= n; i++){
+    dist[i][i] = 0;
+    for(auto v : adj[i]){
+        int b = v.first;
+        long long int w = v.second;
+        dist[i][b] = min(w, dist[i][b]);
+        dist[b][i] = min(w, dist[i][b]);
+    }
+}
+
+for(int k = 1; k <= n; k++){
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= n; j++){
+            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+        }
+    }
+}
+
+dist[1] = 0;
+for(int i = 1; i <= n-1; i++){
+    for(auto e : edges){
+        int a, b, w;
+        tie(a, b ,w) = e;
+        if(dist[b] > dist[a]+w){
+            par[b] = a;
+            dist[b] = dist[a]+w;
+        }
+    }
+}
+for(auto e : edges){
+    int a, b, w;
+    tie(a, b ,w) = e;
+    if(dist[b] > dist[a]+w){
+        found = true;
+        node = b;
+        par[b] = a;
+        dist[b] = dist[a]+w;
+}

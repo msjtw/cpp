@@ -43,13 +43,17 @@
 \tableofcontents
 \pagebreak
 
-% Optionala 
-\tableofcontents
-\pagebreak
 
 \section{Sorting and Searching}
 
-\subsection{4SUM}
+\subsection{Quick Sort}\label{sub:quick_sort} % (fold)
+\lstinputlisting[language=c++, firstline=24, lastline=43]{code_snippets/sort}
+\subsection{Merge Sort}\label{sub:merge_sort} % (fold)
+\lstinputlisting[language=c++, firstline=1, lastline=21]{code_snippets/sort}
+
+% subsection Merge Sort (end)
+
+% subsection Quick Sort (end)
 
 \section{Dynamic Programming}
 
@@ -60,13 +64,20 @@ This way you can generate all subsets in order ready for DP.
 \lstinputlisting[language=C++, firstline=1, lastline=5]{code_snippets/dp_states}
 % subsubsection All subsets (end)
 
-\subsubsection{Permutations to Subsets}\label{ssub:permutations_to_subsets} % (fold)
-
-% subsubsection All subsets (end)
-
 % subsection State represenation (end)
 
+\pagebreak
+
 \section{Graph Algorithms}
+
+\subsection{Shortest Path}\label{sub:shortest_path} % (fold)
+\subsubsection{Djikstra}
+\lstinputlisting[language=C++, firstline=1, lastline=17]{code_snippets/shortest_path}
+\subsubsection{Belman-Ford}
+\lstinputlisting[language=C++, firstline=43, lastline=62]{code_snippets/shortest_path}
+\subsubsection{Floyd–Warshal}
+\lstinputlisting[language=C++, firstline=19, lastline=41]{code_snippets/shortest_path}
+% subsection Shortest Path (end)
 
 \subsection{Union Find}\label{sub:union_find} % (fold)
 \lstinputlisting[language=C++, firstline=7, lastline=51]{code_snippets/union_find}
@@ -76,7 +87,7 @@ This way you can generate all subsets in order ready for DP.
 \lstinputlisting[language=C++, firstline=1, lastline=67]{code_snippets/euleran_apth}
 % subsection  (end)
 
-\pagebreak
+
 
 \subsection{Topo Sort}\label{sub:topo_sort} % (fold)
 \lstinputlisting[language=C++, firstline=7, lastline=50]{code_snippets/topo_sort}
@@ -105,7 +116,7 @@ Given logical formula in the conjunctive normal form:
 we can eliminate disjunction by repacing each \( (a_i \vee b_i) \) element with pair:
 \[ \neg a_i \rightarrow b_i \wedge \neg b_i \rightarrow a_i \]
 
-\lstinputlisting[language=C++, firstline=1, lastline=122]{code_snippets/2sat}
+\lstinputlisting[language=C++, firstline=9, lastline=122]{code_snippets/2sat}
 
 \section{Range Queries}
 
@@ -121,8 +132,7 @@ BASE size table:
 \end{center}
 
 \subsubsection{Point-Range Trees}
-\lstinputlisting[language=C++, firstline=84,lastline=91]{code_snippets/segment_trees}
-\lstinputlisting[language=C++, firstline=93,lastline=107]{code_snippets/segment_trees}
+\lstinputlisting[language=C++, firstline=83,lastline=109]{code_snippets/segment_trees}
 
 \subsubsection{Range-Range Trees}
 \begin{enumerate}
@@ -133,6 +143,13 @@ BASE size table:
 	      \lstinputlisting[language=C++, firstline=41,lastline=63]{code_snippets/segment_trees}
 	      \lstinputlisting[language=C++, firstline=65,lastline=83]{code_snippets/segment_trees}
 \end{enumerate}
+
+
+
+\subsection{Max Subarray Sum}\label{sub:max_subarray_sum} % (fold)
+\lstinputlisting[language=C++, firstline=1,lastline=22]{code_snippets/max_subarray}
+% subsection Max Subarray Sum (end)
+
 \section{Tree Algorithms}
 
 \subsection{Binary Lifitng}\label{sub:binary_lifitng} % (fold)
@@ -144,8 +161,9 @@ BASE size table:
 % subsection Tree Traversal (end)
 
 \subsection{LCA}\label{sub:lca} % (fold)
-
+LCA can be found using binary lifting or by building a segment tree build on pre- and postorder.
 % subsection LCA (end)
+
 
 \section{String Algorithms}
 
@@ -166,6 +184,8 @@ BASE size table:
 
 % subsection Pattern Finding (end)
 
+\pagebreak
+
 \subsection{Palindormes}\label{sub:pal} % (fold)
 Fiding longest palindromic substring.
 \lstinputlisting[language=C++, firstline=75, lastline=107]{code_snippets/strings}
@@ -174,6 +194,10 @@ Fiding longest palindromic substring.
 \section{Mathematics}
 
 \subsection{Fermat's Theorem}\label{sub:fermat_s_theorem} % (fold)
+Modular inverse:
+\[
+	\text{If m is prime, then: } \Huge x^{-1}\,mod\,m = x^{m-2}\,mod\,m
+\]
 \[
 	\Huge	x^{\varphi(m)}\,mod\,m = x^{k\,mod\,(m-1)}\,mod\,m
 \]
@@ -184,17 +208,10 @@ Fiding longest palindromic substring.
 \lstinputlisting[language=C++, firstline=39, lastline=74]{code_snippets/math}
 % subsection Fast Fibonacci (end)
 
-\subsection{Combinatorics}\label{sub:combinatorics} % (fold)
-
-\subsubsection{a}\label{ssub:a} % (fold)
-
-% subsubsection a (end)
-
-% subsection Combinatorics (end)
-
 \section{Geometry}
 
 % section Geometry (end)
+
 \section{Other Algorithms}
 
 

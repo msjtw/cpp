@@ -1,0 +1,22 @@
+ll ssum[2*BASE];
+ll prfx[2*BASE];
+ll sufx[2*BASE];
+ll tsum[2*BASE];
+ 
+void insert(int val, int p){
+    p+=BASE;
+    ssum[p] = val;
+    prfx[p] = val;
+    sufx[p] = val;
+    tsum[p] = val;
+    int l, r;
+    while(p){
+        p >>= 1;
+        l = 2*p;
+        r = 2*p+1;
+        tsum[p] = tsum[l] + tsum[r];
+        prfx[p] = max(prfx[l], tsum[l] + prfx[r]);
+        sufx[p] = max(sufx[l] + tsum[r], sufx[r]);
+        ssum[p] = max(sufx[l] + prfx[r], max(ssum[l], ssum[r]));
+    }
+}

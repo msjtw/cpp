@@ -80,28 +80,30 @@ ll sum_query(int a, int b, int k=1, int x=0, int y=BASE-1){
     }
     return ret;
 }
-
-void insert(int tree[], int p, int val){
+int sal[2*BASE];
+ 
+void add(int p, int val){
     p += BASE;
-    tree[p] = val;
+    sal[p] += val;
     while(p > 0){
         p >>= 1;
-        tree[p] = max(tree[2*p], tree[2*p + 1]);
+        sal[p] = sal[2*p] + sal[2*p+1];
     }
 }
  
-int querry(int tree[], int val){
-    int p = 1;
-    while(p < BASE){
-        if(tree[2*p] >= val){
-            p = 2*p;
+int query(int p, int q){
+    int ret =0 ;
+    p += BASE -1;
+    q += BASE +1;
+    while(p>>1 != q>>1){
+        if(not(p&1)){
+            ret += sal[p+1];
         }
-        else{
-            p = 2*p+1;
+        if(q&1){
+            ret += sal[q-1];
         }
+        p >>= 1;
+        q >>= 1;
     }
-    if(tree[p] >= val)
-        return p -= BASE;
-    else
-        return -1;
+    return ret;
 }

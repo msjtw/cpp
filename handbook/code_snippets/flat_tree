@@ -1,0 +1,14 @@
+int flat[MX];
+int subtree[MX];
+int idx = 0;
+ 
+int dfs(int a, int p){
+    flat[a] = idx;
+    idx ++;
+    for(int b : adj[a]){
+        if(b == p)
+            continue;
+        subtree[a] += dfs(b, a)+1;
+    }
+    return subtree[a];
+}
