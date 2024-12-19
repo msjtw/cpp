@@ -2,7 +2,9 @@
 #include<queue>
  
 using namespace std;
- 
+
+typedef long long int ll;
+
 const int TMX = 1e6+7;
 const int MX = 1000;
 const int MOD = 1e9+7;
@@ -10,8 +12,8 @@ const int MOD = 1e9+7;
 int trie[TMX][30];
 bool stop[TMX];
 int next_node = 1;
-int res = 0;
-int dp[MX];
+ll res = 0;
+ll dp[MX];
  
 void insert(string s){
     int idx = 0;
@@ -53,13 +55,11 @@ int main(){
                     break;
                 idx = trie[idx][text[k]-'a'];
                 if(stop[idx]){
-                    dp[i] = (dp[i] + dp[k+1])%MOD;
+                    dp[i] = (dp[i] + dp[k+1]);
                 }
             }
         }
-        if(dp[0] > 0){
-            res++;
-        }
+        res += dp[0];
     }
  
     cout << res;
